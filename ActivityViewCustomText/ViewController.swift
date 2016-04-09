@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Function to delay then put on main queue (credit Matt Neuburg)
+// Function to run code after a delay (credit Matt Neuburg)
 func delay(delay:Double, closure:()->()) {
     dispatch_after(
         dispatch_time(
