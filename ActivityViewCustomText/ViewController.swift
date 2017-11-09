@@ -9,20 +9,16 @@
 import UIKit
 
 // Function to run code after a delay (credit Matt Neuburg)
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delay(_ delay:Double, closure:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var saveButton: UIButton!
     
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func buttonPressed(_ sender: AnyObject) {
         
         // Create activity view and then success/hide after 5 seconds
         EZLoadingActivity.show("Posting Updates ...", disableUI: true)
